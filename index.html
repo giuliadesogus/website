@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0b0b">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Giulia Desogus - Portfolio</title>
+    
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
+    
+    <link rel="preload" href="immagini/L'Annunciazione2.webp" as="image" type="image/webp" fetchpriority="high">
+
+    <style>
+        /* RESET GENERALE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body {
+            background-color: #0b0b0b;
+            color: #ffffff;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Tocco/touch: azzera il ritardo dei 300ms e il doppio-tap-zoom sugli elementi interattivi,
+           lasciando intatto lo zoom manuale dell'utente sul resto della pagina */
+        a, button, input, textarea, [role="button"] {
+            touch-action: manipulation;
+        }
+
+        /* SKIP LINK per utenti che navigano con tastiera / screen reader */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            background: #ffffff;
+            color: #000000;
+            padding: 12px 20px;
+            z-index: 3000;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .skip-link:focus {
+            top: 0;
+            outline: 2px solid #ffffff;
+            outline-offset: 2px;
+        }
+
+        /* FOCUS visibile e coerente per tastiera / screen reader */
+        a:focus-visible,
+        button:focus-visible,
+        [role="button"]:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible,
+        [tabindex]:focus-visible {
+            outline: 2px solid #ffffff;
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        /* Nasconde in modo accessibile (visibile solo agli screen reader) */
+        .sr-only {
+            position: absolute !important;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0, 0, 0, 0);
+            white-space: nowrap; border: 0;
+        }
+
+        /* STRUTTURA A COLONNA FISSA (SINISTRA) */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            padding: 40px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 100;
+            background-color: #0b0b0b;
+        }
+
+        /* SPAZIO GIF SOPRA IL NOME */
+        .brand-gif {
+            width: 100%;
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .brand {
+            background: none;
+            border: 0;
+            padding: 0;
+            text-align: left;
+            color: inherit;
+            cursor: pointer;
+            display: block;
+        }
+
+        .brand h1 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        .brand p {
+            font-size: 0.8rem;
+            color: #666666;
+            margin-top: 5px;
+            letter-spacing: 0.05em;
+        }
+
+        nav ul {
+            list-style: none;
+            margin-top: -60px;
+        }
+
+        nav ul li {
+            margin-bottom: 18px;
+        }
+
+        nav ul li a {
+            color: #666666;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 4px;
+            min-height: 44px;
+            line-height: 28px;
+        }
+
+        nav ul li a:hover, 
+        nav ul li a.active,
+        nav ul li a:active {
+            color: #ffffff;
+        }
+
+        /* BLOCCO CONTENITORE BOTTOM SIDEBAR (ICONE + CREDITI) */
+        .sidebar-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* ICONE SOCIAL */
+        .social-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .social-links a {
+            color: #555555;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        .social-links a:hover {
+            color: #ffffff;
+        }
+
+        .credits-sidebar {
+            font-size: 0.75rem;
+            color: #333333;
+            letter-spacing: 0.02em;
+            line-height: 1.4;
+        }
+
+        /* AREA CONTENUTI PRINCIPALI (DESTRA) */
+        main {
+            position: relative;
+            margin-left: 280px;
+            flex-grow: 1;
+            min-height: 70vh;
+            padding: 0;
+            transition: min-height .45s cubic-bezier(.22,.61,.36,1);
+        }
+
+        /* GESTIONE DELLE PAGINE INTERNE */
+        .page{
+            display:block;
+            opacity:0;
+            visibility:hidden;
+            transform:translateY(18px);
+            transition:
+                opacity .45s ease,
+                transform .45s cubic-bezier(.22,.61,.36,1),
+                visibility 0s linear .45s;
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            padding: 50px 60px 80px 20px;
+            pointer-events:none;
+            will-change: opacity, transform;
+        }
+
+        .page.active{
+            opacity:1;
+            visibility:visible;
+            transform:translateY(0);
+            pointer-events:auto;
+            transition:
+                opacity .45s ease,
+                transform .45s cubic-bezier(.22,.61,.36,1),
+                visibility 0s linear 0s;
+        }
+
+        /* 1. SEZIONE HOME */
+        .home-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+            align-items: center;
+            justify-items: center;
+            min-height: 75vh;
+        }
+
+        .home-image-wrapper {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .home-image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(20%);
+        }
+
+        /* 2. FILTRI DELLA GALLERIA */
+        .filter-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 35px;
+            padding-left: 5px;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            color: #555555;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            padding: 10px 4px 10px 14px;
+            min-height: 44px;
+            position: relative;
+            transition: color 0.4s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active,
+        .filter-btn:active {
+            color: #ffffff;
+        }
+
+        /* Piccolo puntino che si sposta accanto alla voce attiva.
+           Su desktop scorre in orizzontale (left), su telefono in verticale (top): 
+           la funzione JS moveFilterDot() decide quale usare in base al layout attivo. */
+        .filter-dot {
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            transform: translateY(-50%) scale(0);
+            opacity: 0;
+            transition: left 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+                        top 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+                        transform 0.3s ease,
+                        opacity 0.3s ease;
+        }
+
+        .filter-dot.visible {
+            opacity: 1;
+            transform: translateY(-50%) scale(1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .filter-btn,
+            .filter-dot {
+                transition: none !important;
+            }
+        }
+
+        /* 3. GRIGLIA OPERE IN STILE MOSAICO */
+        .gallery-grid {
+            columns: 3 300px;
+            column-gap: 20px;
+            width: 100%;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            position: relative;
+            cursor: pointer;
+            background-color: #121212;
+            overflow: hidden;
+        }
+
+        .gallery-item:focus-visible {
+            outline: 2px solid #ffffff;
+            outline-offset: 3px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: opacity 0.4s ease, filter 0.4s ease;
+            filter: grayscale(10%);
+        }
+
+        .gallery-item:hover img,
+        .gallery-item:active img {
+            opacity: 0.75;
+            filter: grayscale(0%);
+        }
+
+        .item-info-hidden {
+            display: none;
+        }
+
+        .gallery-item.hidden {
+            display: none;
+        }
+
+        /* 4. SEZIONE ABOUT & CONTATTI */
+        .about-content {
+            max-width: 800px;
+            padding-left: 5px;
+            line-height: 1.65;
+        }
+
+        .about-content h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .about-content p {
+            font-size: 0.92rem;
+            color: #cccccc;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .cv-title {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 40px 0 20px 0;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .cv-list p {
+            font-size: 0.88rem;
+            color: #999999;
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .cv-list strong {
+            color: #ffffff;
+            font-weight: 500;
+            margin-right: 8px;
+        }
+
+        /* MODULO DI CONTATTO RIGIDO E PULITO */
+        .contact-form {
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: #666666;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            background-color: #121212;
+            border: 1px solid #222222;
+            padding: 12px;
+            color: #ffffff;
+            font-size: 16px; /* >=16px: evita lo zoom automatico al focus su iOS Safari */
+            border-radius: 0;
+            outline: none;
+            transition: border-color 0.3s ease;
+            resize: vertical; /* evita il resize orizzontale della textarea che manda in overflow su mobile */
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #555555;
+        }
+
+        .submit-btn {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 14px 30px;
+            min-height: 44px;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #cccccc;
+        }
+
+        /* FOOTER STANDARDIZZATO */
+        footer {
+            margin-left: 280px;
+            padding: 0 60px 40px 20px;
+            margin-top: auto;
+        }
+
+        footer p {
+            font-size: 0.75rem;
+            color: #444444;
+            letter-spacing: 0.05em;
+        }
+
+        /* LIGHTBOX STRUTTURATO */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(4, 4, 4, 0.98);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lightbox-content-wrapper {
+            position: relative;
+            width: 100%;
+            height: 62vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 0 40px;
+        }
+
+        .lightbox-content-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            user-select: none;
+            transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center center;
+            cursor: zoom-in;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666666;
+            font-size: 2.5rem;
+            padding: 20px;
+            background: none;
+            border: 0;
+            min-width: 44px;
+            min-height: 44px;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.3s ease;
+            z-index: 2100;
+        }
+
+        .lightbox-nav:hover,
+        .lightbox-nav:active {
+            color: #ffffff;
+        }
+
+        .lightbox-prev { left: 30px; }
+        .lightbox-next { right: 30px; }
+
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #666666;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 2200;
+            background: none;
+            border: 0;
+            padding: 10px;
+            min-width: 44px;
+            min-height: 44px;
+            line-height: 1;
+        }
+
+        .close-btn:hover,
+        .close-btn:active { color: #ffffff; }
+
+        .lightbox-dots {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            z-index: 2100;
+            height: 12px;
+            align-items: center;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #444444;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: #ffffff;
+            transform: scale(1.2);
+        }
+
+        .lightbox-caption {
+            width: 100%;
+            max-width: 750px;
+            text-align: center;
+            padding: 0 20px 30px 20px;
+            margin-top: 5px;
+        }
+
+        .lightbox-title {
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .lightbox-details {
+            font-size: 0.8rem;
+            color: #888888;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .lightbox-desc-it, 
+        .lightbox-desc-en {
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: #cccccc;
+            max-width: 680px;
+            margin: 0 auto;
+            text-align: justify;
+            text-align-last: center;
+        }
+
+        .lightbox-desc-en {
+            color: #8c8c8c;
+            margin-top: 6px;
+        }
+
+        /* DESIGN PULITO PER IL COOKIE BANNER (GDPR COMPLIANT) */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #121212;
+            border-top: 1px solid #222222;
+            padding: 20px 40px calc(20px + env(safe-area-inset-bottom)) 40px;
+            z-index: 9999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transform: translateY(110%);
+            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+            pointer-events: none;
+        }
+
+        .cookie-banner.visible {
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .cookie-text {
+            font-size: 0.8rem;
+            color: #cccccc;
+            line-height: 1.5;
+            max-width: 70%;
+            letter-spacing: 0.02em;
+        }
+
+        .cookie-text a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .cookie-btn {
+            background: none;
+            border: 1px solid #444444;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            min-height: 40px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .cookie-btn.accept {
+            background-color: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        .cookie-btn:hover {
+            border-color: #ffffff;
+        }
+
+        .cookie-btn.accept:hover {
+            background-color: #cccccc;
+            border-color: #cccccc;
+        }
+
+        /* RESPONSIVE PER DISPOSITIVI TABLET E MOBILE */
+        @media (max-width: 992px) {
+            header {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 40px calc(30px + env(safe-area-inset-right)) 20px calc(30px + env(safe-area-inset-left));
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .brand {
+                display: flex;
+                align-items: center;
+            }
+
+            .brand-gif {
+                margin-bottom: 0;
+                margin-right: 20px;
+                max-width: 80px;
+            }
+
+            .sidebar-bottom {
+                position: absolute;
+                top: 45px;
+                right: 30px;
+            }
+
+            .credits-sidebar {
+                display: none;
+            }
+
+            nav {
+                width: 100%;
+                margin-top: 25px !important;
+            }
+
+            nav ul {
+                margin-top: 0;
+                display: flex;
+                gap: 25px;
+            }
+
+            nav ul li {
+                margin-bottom: 0;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 0;
+            }
+            .page {
+                padding: 20px 30px 60px 30px;
+            }
+
+            .home-grid {
+                min-height: 55vh;
+            }
+
+            .gallery-grid {
+                columns: 2 280px;
+            }
+
+            footer {
+                margin-left: 0;
+                padding: 0 30px calc(40px + env(safe-area-inset-bottom)) 30px;
+            }
+
+            .lightbox-prev { left: 15px; }
+            .lightbox-next { right: 15px; }
+            .lightbox-nav { font-size: 2rem; }
+
+            .cookie-banner {
+                flex-direction: column;
+                gap: 20px;
+                padding: 25px 30px;
+                align-items: flex-start;
+            }
+            .cookie-text {
+                max-width: 100%;
+            }
+            .cookie-buttons {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+        @media (max-width: 576px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+                position: relative;
+                padding: 24px 20px 16px 20px;
+            }
+
+            .sidebar-bottom {
+                position: static;
+                margin-top: 5px;
+            }
+
+            .brand {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .brand-gif {
+                margin-right: 0;
+                margin-bottom: 16px;
+                max-width: 64px;
+            }
+
+            .brand h1 { font-size: 1.15rem; }
+
+            nav ul {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 6px 18px;
+                width: 100%;
+            }
+
+            nav ul li a {
+                font-size: 0.8rem;
+                letter-spacing: 0.12em;
+            }
+
+            .filter-menu {
+                flex-direction: column;
+                align-items: flex-start;
+                flex-wrap: nowrap;
+                gap: 6px;
+            }
+
+            .filter-btn {
+                width: 100%;
+                text-align: left;
+            }
+
+            .gallery-grid {
+                columns: 1 100%;
+            }
+
+            .page {
+                padding: 16px 20px 48px 20px;
+            }
+
+            .about-content p,
+            .cv-list p {
+                text-align: left;
+            }
+
+            .lightbox-content-wrapper {
+                height: 65vh;
+                max-height: 80vh;
+                padding: 10px 10px;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .lightbox-content-wrapper img {
+                width: auto;
+                max-width: 95%;
+                max-height: 100%;
+                object-fit: contain;
+            }
+
+            .close-btn { top: 16px; right: 16px; }
+            .lightbox-prev { left: 6px; }
+            .lightbox-next { right: 6px; }
+            .lightbox-nav { font-size: 1.8rem; padding: 14px; }
+            .lightbox-caption { padding: 0 16px 20px 16px; }
+
+            .cookie-banner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+                padding: 20px 20px calc(20px + env(safe-area-inset-bottom)) 20px;
+            }
+            .cookie-text {
+                max-width: 100%;
+            }
+            .cookie-buttons {
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+            }
+            .cookie-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page,
+            main,
+            .lightbox-content-wrapper img,
+            .filter-btn,
+            .filter-dot,
+            .cookie-banner {
+                transition: none !important;
+            }
+            html { scroll-behavior: auto !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
+
+    <header role="banner">
+        <button type="button" class="brand" onclick="goHome()" aria-label="Giulia Desogus – Torna alla home">
+            <img src="immagini/simbolo-gif2.gif" alt="" class="brand-gif" aria-hidden="true">
+            <h1>Giulia Desogus</h1>
+        </button>
+        
+        <nav aria-label="Navigazione principale">
+            <ul>
+               <li><a id="btn-works" href="#page-works" data-page="works">Works / Opere</a></li>
+               <li><a id="btn-about" href="#page-about" data-page="about">About / Biografia</a></li>
+               <li><a id="btn-contacts" href="#page-contacts" data-page="contacts">Contact / Contatti</a></li>
+            </ul>
+        </nav>
+        
+        <div class="sidebar-bottom">
+            <div class="social-links" aria-label="Contatti social">
+                <a href="#" target="_blank" rel="noopener" aria-label="Instagram (si apre in una nuova scheda)"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="#" target="_blank" rel="noopener" aria-label="Pinterest (si apre in una nuova scheda)"><i class="fa-brands fa-pinterest" aria-hidden="true"></i></a>
+                <a href="mailto:giuliadesogus2000@hotmail.it" aria-label="Scrivi una email a Giulia Desogus"><i class="fa-regular fa-envelope" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" role="main" aria-live="polite">
+        
+        <section id="page-home" class="page active" aria-label="Home">
+            <div class="home-grid">
+                <button type="button" class="home-image-wrapper" onclick="switchPage('works')" aria-label="Entra nella galleria delle opere" style="background:none;border:0;padding:0;cursor:pointer;display:block;width:100%;max-width:900px;">
+                    <img src="immagini/L'Annunciazione2.webp" fetchpriority="high" alt="L'Annunciazione – opera introduttiva di Giulia Desogus" style="cursor: pointer;">
+                </button>
+            </div>
+        </section>
+
+        <section id="page-works" class="page" aria-label="Opere / Works">
+            <div class="filter-menu" id="filterMenu" role="group" aria-label="Filtra le opere per categoria">
+                <button class="filter-btn active" onclick="filterSelection('all', this)">Tutti / All</button>
+                <button class="filter-btn" onclick="filterSelection('ink', this)">Inchiostro / Inks</button>
+                <button class="filter-btn" onclick="filterSelection('printmaking', this)">Incisione / Printmaking</button>
+                <span class="filter-dot" id="filterDot" aria-hidden="true"></span>
+            </div>
+
+            <div class="gallery-grid" role="list">
+                <div class="gallery-item" data-category="ink" onclick="openLightbox(this)">
+                    <img src="immagini/Con le foglie in marea.webp" alt="Con le foglie in marea" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Con le foglie in marea</h3>
+                        <p class="details">Inchiostro su carta / Ink on paper, 51x37 cm, 2025</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="ink" onclick="openLightbox(this)">
+                    <img src="immagini/Senza Titolo - Inverso.jpg" alt="Senza Titolo" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Senza Titolo</h3>
+                        <p class="details">Inchiostro su carta / Ink on paper, 34,5x55 cm, 2025</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="ink" onclick="openLightbox(this)">
+                    <img src="immagini/Perdere un guanto.jpg" alt="Senza Titolo" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Perdere un guanto</h3>
+                        <p class="details">Inchiostro su carta / Ink on paper, 50x70 cm, 2026</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="ink" onclick="openLightbox(this)">
+                    <img src="immagini/Senza Titolo.jpeg" alt="Senza Titolo" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Senza Titolo</h3>
+                        <p class="details">Inchiostro su carta / Ink on paper, 78x100 cm, 2025</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="ink" onclick="openLightbox(this)">
+                    <img src="immagini/La nascita - Giulia Desogus.jpg" alt="La nascita" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">La nascita</h3>
+                        <p class="details">Inchiostro su carta / Ink on paper, 16,5x37 cm, 2025</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="ink" onclick="openLightbox(this)">
+                    <img src="immagini/Erroneo Errare.png" alt="Erroneo Errare" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Erroneo Errare</h3>
+                        <p class="details">Inchiostro su carta / Ink on paper, 35x50 cm, 2025</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="printmaking" onclick="openLightbox(this)">
+                    <img src="immagini/Dare un senso al vuoto 3.jpg" alt="Dare un senso al vuoto pt.3" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Dare un senso al vuoto pt.3</h3>
+                        <p class="details">Acquaforte / Etching, 28x38 cm, 2026</p>
+                        <p class="desc-it">La serie nasce da una sperimentazione tecnica che rielabora i confini dell’incisione tradicional. Partendo da un’unica lastra lavorata ad acquaforte, sono stati utilizzati degli stencil per selezionare e isolare porzioni del segno, dando vita a una sequenza di figure indipendenti. Il vuoto smette di essere assenza per divenire struttura, andando a dialogare con i pieni dell’inchiostro.</p>
+                        <p class="desc-en">The series stems from a technical experimentation that redefines the boundaries of traditional printmaking. Starting from a single etched plate, stencils were used to select and isolate portions of the mark, giving life to a sequence of independent figures. The negative space ceases to be an absence and becomes a structure, creating a dialogue with the solid areas of the ink.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="ink" onclick="openLightbox(this)">
+                    <img src="immagini/Litigio Perplesso - Giulia Desogus.jpg" alt="Litigio Perplesso" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Litigio Perplesso</h3>
+                        <p class="details">Inchiostro su carta / Ink on paper, 38x49,5 cm, 2025</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="ink" onclick="openLightbox(this)">
+                    <img src="immagini/Perdersi - Giulia Desogus.jpeg" alt="Perdersi" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Perdersi</h3>
+                        <p class="details">Inchiostro su carta / Ink on paper, 56x50,5 cm, 2025</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="ink" onclick="openLightbox(this)">
+                    <img src="immagini/Scorgere tra le spine.jpeg" alt="Scorgere tra le spine" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Scorgere tra le spine</h3>
+                        <p class="details">Inchiostro su carta / Ink on paper, 47,5x39 cm, 2025</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="printmaking" onclick="openLightbox(this)">
+                    <img src="immagini/Dare un senso al vuoto 2.jpg" alt="Dare un senso al vuoto pt.2" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Dare un senso al vuoto pt.2</h3>
+                        <p class="details">Acquaforte / Etching, 28x38 cm, 2026</p>
+                        <p class="desc-it">La serie nasce da una sperimentazione tecnica che rielabora i confini dell’incisione tradizionale. Partendo da un’unica lastra lavorata ad acquaforte, sono stati utilizzati degli stencil per selezionare e isolare porzioni del segno, dando vita a una sequenza di figure indipendenti. Il vuoto smette di essere assenza per divenire struttura, andando a dialogare con i pieni dell’inchiostro.</p>
+                        <p class="desc-en">The series stems from a technical experimentation that redefines the boundaries of traditional printmaking. Starting from a single etched plate, stencils were used to select and isolate portions of the mark, giving life to a sequence of independent figures. The negative space ceases to be an absence and becomes a structure, creating a dialogue with the solid areas of the ink.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="ink" onclick="openLightbox(this)">
+                    <img src="immagini/Vaso di Dubbi - Giulia Desogus.jpg" alt="Vaso di dubbi" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Vaso di dubbi</h3>
+                        <p class="details">Inchiostro su carta / Ink on paper, 38x49,5 cm, 2025</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="ink" onclick="openLightbox(this)">
+                    <img src="immagini/L'Annunciazione2.webp" alt="L'Annunciazione" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">L'Annunciazione</h3>
+                        <p class="details">Inchiostro su carta / Ink on paper, 100x155 cm, 2024</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="printmaking" onclick="openLightbox(this)">
+                    <img src="immagini/Dare un senso al vuoto 1.jpg" alt="Dare un senso al vuoto pt.1" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Dare un senso al vuoto pt.1</h3>
+                        <p class="details">Acquaforte / Etching, 2026</p>
+                        <p class="desc-it">La serie nasce da una sperimentazione tecnica che rielabora i confini dell’incisione tradizionale. Partendo da un’unica lastra lavorata ad acquaforte, sono stati utilizzati degli stencil per selezionare e isolare porzioni del segno, dando vita a una sequenza di figure indipendenti. Il vuoto smette di essere assenza per divenire struttura, andando a dialogare con i pieni dell’inchiostro.</p>
+                        <p class="desc-en">The series stems from a technical experimentation that redefines the boundaries of traditional printmaking. Starting from a single etched plate, stencils were used to select and isolate portions of the mark, giving life to a sequence of independent figures. The negative space ceases to be an absence and becomes a structure, creating a dialogue with the solid areas of the ink.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="printmaking" onclick="openLightbox(this)">
+                    <img src="immagini/Erba Viva - Giulia Desogus.jpg" alt="Erba Viva" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Erba Viva</h3>
+                        <p class="details">Acquaforte / Etching, 38x56 cm, 2026</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+
+<div class="gallery-item" data-category="printmaking" data-images="immagini/Sogni non realizzabili 1.jpg, immagini/Sogni non realizzabili 2.jpg, immagini/Sogni non realizzabili 3.jpg" onclick="openLightbox(this)">
+    <img src="immagini/Sogni non realizzabili 1.jpg" alt="Sogni non realizzabili" loading="lazy">
+    <div class="item-info-hidden">
+        <h3 class="title">Sogni non realizzabili</h3>
+        <p class="details">2026, 30x30 cm</p>
+        <p class="desc-it"></p> <!-- Questa riga mancava e mandava il codice in crash! -->
+        <p class="desc-en">2026, 30x30 cm</p>
+    </div>
+</div>             
+
+<div class="gallery-item" data-category="printmaking" data-images="immagini/Parlare al niente 1.jpg, immagini/Parlare al niente 2.jpg, immagini/Parlare al niente 3.jpg" onclick="openLightbox(this)">
+    <img src="immagini/Parlare al niente 1.jpg" alt="Parlare al niente" loading="lazy">
+    <div class="item-info-hidden">
+        <h3 class="title">Parlare al niente</h3>
+        <p class="details">2026, 30x30 cm</p>
+        <p class="desc-it"></p> <!-- Questa riga mancava e mandava il codice in crash! -->
+        <p class="desc-en">2026, 30x30 cm</p>
+    </div>
+</div>      
+
+<div class="gallery-item" data-category="printmaking" data-images="immagini/La scrivania è la ascoltatrice 1.jpg, immagini/La scrivania è la ascoltatrice 2.jpg, immagini/La scrivania è la ascoltatrice 3.jpg" onclick="openLightbox(this)">
+    <img src="immagini/La scrivania è la ascoltatrice 1.jpg" alt="La scrivania è la ascoltatrice" loading="lazy">
+    <div class="item-info-hidden">
+        <h3 class="title">La scrivania è la ascoltatrice</h3>
+        <p class="details">2026, 30x30 cm</p>
+        <p class="desc-it"></p> <!-- Questa riga mancava e mandava il codice in crash! -->
+        <p class="desc-en">2026, 30x30 cm</p>
+    </div>
+</div>  
+
+<div class="gallery-item" data-category="printmaking" data-images="immagini/Vivere senza cura 1.jpg, immagini/Vivere senza cura 2.jpg, immagini/Vivere senza cura 3.jpg" onclick="openLightbox(this)">
+    <img src="immagini/Vivere senza cura 1.jpg" alt="La scrivania è la ascoltatrice" loading="lazy">
+    <div class="item-info-hidden">
+        <h3 class="title">Vivere senza cura</h3>
+        <p class="details">2026, 30x30 cm</p>
+        <p class="desc-it"></p> <!-- Questa riga mancava e mandava il codice in crash! -->
+        <p class="desc-en">2026, 30x30 cm</p>
+    </div>
+</div>  
+
+ <div class="gallery-item" data-category="printmaking" onclick="openLightbox(this)">
+                    <img src="immagini/Giulia Desogus - Untitled bn2.jpg" alt="Senza Titolo" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Senza Titolo</h3>
+                        <p class="details">Acquaforte / Etching, 10x10 cm, 2025</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="printmaking" onclick="openLightbox(this)">
+                    <img src="immagini/Dare un senso al vuoto 4.jpg" alt="Dare un senso al vuoto pt.4" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Dare un senso al vuoto pt.4</h3>
+                        <p class="details">Acquaforte / Etching, 28x38 cm, 2026</p>
+                        <p class="desc-it">La serie nasce da una sperimentazione tecnica che rielabora i confini dell’incisione tradizionale. Partendo da un’unica lastra lavorata ad acquaforte, sono stati utilizzati degli stencil per selezionare e isolare porzioni del segno, dando vita a una sequenza di figure indipendenti. Il vuoto smette di essere assenza per divenire struttura, andando a dialogare con i pieni dell’inchiostro.</p>
+                        <p class="desc-en">The series stems from a technical experimentation that redefines the boundaries of traditional printmaking. Starting from a single etched plate, stencils were used to select and isolate portions of the mark, giving life to a sequence of independent figures. The negative space ceases to be an absence and becomes a structure, creating a dialogue with the solid areas of the ink.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="printmaking" onclick="openLightbox(this)">
+                    <img src="immagini/Dare un senso al vuoto 5.jpg" alt="Dare un senso al vuoto pt.5" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Dare un senso al vuoto pt.5</h3>
+                        <p class="details">Acquaforte / Etching, 28x38 cm, 2026</p>
+                        <p class="desc-it">La serie nasce da una sperimentazione tecnica che rielabora i confini dell’incisione tradizionale. Partendo da un’unica lastra lavorata ad acquaforte, sono stati utilizzati degli stencil per selezionare e isolare porzioni del segno, dando vita a una sequenza di figure indipendenti. Il vuoto smette di essere assenza per divenire struttura, andando a dialogare con i pieni dell’inchiostro.</p>
+                        <p class="desc-en">The series stems from a technical experimentation that redefines the boundaries of traditional printmaking. Starting from a single etched plate, stencils were used to select and isolate portions of the mark, giving life to a sequence of independent figures. The negative space ceases to be an absence and becomes a structure, creating a dialogue with the solid areas of the ink.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="printmaking" data-images="immagini/La parcheggiatrice di macchine.jpg, immagini/La parcheggiatrice di macchine 2.jpg, immagini/La parcheggiatrice di macchine 4.jpg, immagini/La parcheggiatrice di macchine 3.jpg, immagini/La parcheggiatrice di macchine 5.jpg" onclick="openLightbox(this)">
+                    <img src="immagini/La parcheggiatrice di macchine.jpg" alt="La parcheggiatrice di macchine" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">La parcheggiatrice di macchine</h3>
+                        <p class="details">Puntasecca su plexiglass, stampa a secco e intaglio su carta / Drypoint on plexiglass, blind debossing and papercut, 2026</p>
+                        <p class="desc-it">Stampato su carta IKEA presso l’Accademia Albertina di Belle Arti di Torino, 2026. Contenente 11 puntesecche e 5 intagli su carta; testi di Giulia Desogus. N. Esemplari 3</p>
+                        <p class="desc-en">Printed on IKEA paper at the Albertina Academy of Fine Arts in Turin, 2026. Containing 11 drypoints and 5 woodcuts on paper; texts by Giulia Desogus. Edition size: 3</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="ink" onclick="openLightbox(this)">
+                    <img src="immagini/Senza Titolo (Bacio)-Giulia Desogus.png" alt="Senza Titolo" loading="lazy">
+                    <div class="item-info-hidden">
+                        <h3 class="title">Senza Titolo</h3>
+                        <p class="details">Inchiostro su carta / Ink on paper, 75x100 cm, 2025</p>
+                        <p class="desc-it"></p>
+                        <p class="desc-en"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-about" class="page">
+            <div class="about-content">
+                <div class="lang-section text-it">
+                    <h2>Biografia</h2>
+                    <p>Giulia Desogus nasce nel 2000 e cresce ad Abbasanta (OR, Italia). 
+                    Successivamente al conseguimento del diploma al liceo 
+                    artistico C. Contini ad Oristano, si trasferisce a Firenze per 
+                    frequentare la scuola di Pittura dell’Accademia di Belle Arti 
+                    di Firenze; nel 2023 conclude il percorso con lode. Oggi vive 
+                    a Torino e frequenta il corso magistrale in Grafica d’Arte 
+                    all’Accademia Albertina di Belle arti.</p>
+                    
+                    <h3 class="cv-title">Curriculum Vitae</h3>
+                    <div class="cv-list">
+                        <p><strong>2026</strong> - "Premio Start", a cura di Roberta Vanali, Cagliari</p>
+                        <p><strong>2026</strong> - "Creature di Carta", Co-autrice per la serie di Libri d’Artista. Progetto sviluppato collettivamente all’interno della manifestazione “ARWE”. Esemplari inclusi nella raccolta di Libri d’Artista dell’Accademia Albertina di Torino, a cura di Sonia Gavazza, Francesca Torelli ed Elena Ribero, Torino</p>
+                        <p><strong>2026</strong> - "Accademie in Dialogo", a cura di Laboratorio Xilografico Dettori e Fondazione Elisabetta Viarengo E.T.S., Porto Torres</p>
+                        <p><strong>2026</strong> - "Non Perdiamoci di Vista", a cura di Laboratorio Xilografico Dettori e Fondazione Elisabetta Viarengo E.T.S., Porto Torres</p>
+                        <p><strong>2026</strong> - "Non Perdiamoci di Vista", a cura di Antonella Cinelli, Pieve di Cento</p>
+                        <p><strong>2025</strong> - "Premio Ilaria Ciardi", a cura dell'Accademia di Belle Arti di Ravenna, Ravenna</p>
+                        <p><strong>2025</strong> - "Non Perdiamoci di Vista", a cura di Antonella Cinelli, Bentivoglio</p>
+                        <p><strong>2025</strong> - "Macchiato V - Respiri", a cura di Macchiato Celebratio Arts, Melle</p>
+                        <p><strong>2025</strong> - "Labirinto", a cura di A Testa Alta E.T.S., Street Levels Gallery, Firenze</p>
+                        <p><strong>2023</strong> - Pubblicazione "Artemisia Gentileschi. Digital Review", edizione a cura di Anna Maria Salvatore, Accademia di Belle Arti di Firenze, Quorum Edizioni, ISBN: 979 1281199071, Firenze</p>
+                        <p><strong>2022</strong> - "Biennale della Tecnologia. Principi: costruire per le generazioni", a cura di Paratissima, Torino</p>
+                        <p><strong>2022</strong> - "Art Not War", a cura di Loredana Remolo, Lucca</p>
+                        <p><strong>2022</strong> - "Un racconto tutto per sé", Vincitrice Concorso Nazionale di illustrazione, a cura di Centro Bibliotecario di Ateneo dell'università degli Studi di Salerno, Salerno</p>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid #2a2a2a; margin: 40px 0;">
+
+                <div class="lang-section text-en">
+                    <h2>Biography</h2>
+                    <p>Giulia Desogus was born in 2000 and grew up in Abbasanta (OR, Italy). 
+                    After graduating from the C. Contini Art High School in Oristano, 
+                    she moved to Florence to attend the School of Painting at the Academy of Fine Arts of Florence, 
+                    completing her degree with honors (cum laude) in 2023. 
+                    She currently lives in Torino, where she is pursuing a Master’s degree in Printmaking and Graphic Arts at the Albertina Academy of Fine Arts.</p>
+                    
+                    <h3 class="cv-title">Curriculum Vitae</h3>
+                    <div class="cv-list">
+                        <p><strong>2026</strong> - "Premio Start", curated by Roberta Vanali, Cagliari</p>
+                        <p><strong>2026</strong> - "Creature di Carta", Co-author for the Artist's Books series. Project collectively developed within the framework of the 'ARWE' festival. Copies included in the Artist's Books collection of the Albertina Academy of Fine Arts in Turin, curated by Sonia Gavazza, Francesca Torelli, and Elena Ribero, Turin"</p>
+                        <p><strong>2026</strong> - "Accademie in Dialogo", curated by Laboratorio Xilografico Dettori and Fondazione Elisabetta Viarengo E.T.S., Porto Torres</p>
+                        <p><strong>2026</strong> - "Non Perdiamoci di Vista", curated by Antonella Cinelli, Pieve di Cento</p>
+                        <p><strong>2025</strong> - "Premio Ilaria Ciardi", curated by the Academy of Fine Arts of Ravenna, Ravenna</p>
+                        <p><strong>2025</strong> - "Non Perdiamoci di Vista", curated by Antonella Cinelli, Bentivoglio</p>
+                        <p><strong>2025</strong> - "Macchiato V - Respiri", curated by Macchiato Celebratio Arts, Melle</p>
+                        <p><strong>2025</strong> - "Labirinto", curated by A Testa Alta E.T.S., Street Levels Gallery, Florence</p>
+                        <p><strong>2023</strong> - Publication "Artemisia Gentileschi. Digital Review", edition curated by Anna Maria Salvatore, Academy of Fine Arts of Florence, Quorum Edizioni, ISBN: 979 1281199071, Florence</p>
+                        <p><strong>2022</strong> - "Biennale della Tecnologia. Principi: costruire per le generazioni", curated by Paratissima, Turin</p>
+                        <p><strong>2022</strong> - "Art Not War", curated by Loredana Remolo, Lucca</p>
+                        <p><strong>2022</strong> - "Un racconto tutto per sé", Winner of the National Illustration Contest, curated by the University Library Advisory Board of the University of Salerno, Salerno</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-contacts" class="page">
+            <div class="about-content" style="max-width: 600px;">
+                <div class="lang-section text-it" style="margin-bottom: 10px;">
+                    <h2>Contatti</h2>
+                    <p>Per maggiori informazioni sulle opere, collaborazioni o per lasciare un messaggio, compilare il modulo sottostante o scrivere a: <a href="mailto:giuliadesogus2000@hotmail.it" style="color: #fff; text-decoration: underline;">giuliadesogus2000@hotmail.it</a></p>
+                </div>
+                
+                <div class="lang-section text-en" style="margin-bottom: 30px;">
+                    <p style="color: #a0a0a0; font-size: 0.95rem;">If you would like to request information about the artworks, collaborations, or drop a message, please use the form below or write to the email above.</p>
+                </div>
+
+                <form action="https://formspree.io/f/xqerzelv" method="POST" class="contact-form">
+                    <input type="text" name="_gotcha" style="display:none">
+
+                    <div class="form-group">
+                        <label for="contact-name">NOME / NAME</label>
+                        <input type="text" id="contact-name" name="name" required autocomplete="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-email">EMAIL</label>
+                        <input type="email" id="contact-email" name="_replyto" required autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-message">MESSAGGIO / MESSAGE</label>
+                        <textarea id="contact-message" name="message" rows="5" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Invia / Send</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="page-privacy" class="page" aria-label="Privacy Policy">
+            <div class="about-content">
+                <div class="lang-section text-it">
+                    <h2>Informativa sulla Privacy e sui Cookie</h2>
+                    <p>La presente Informativa ha lo scopo di informare l'utente sulle modalità di trattamento dei dati personali ai sensi dell'art. 13 del Regolamento UE 2016/679 (GDPR).</p>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">1. Titolare del Trattamento</h3>
+                    <p>Il Titolare del trattamento dei dati è <strong>Giulia Desogus</strong>. Per qualsiasi richiesta di chiarimento, rettifica o cancellazione, è possibile inviare una comunicazione diretta all'indirizzo email: <a href="mailto:giuliadesogus2000@hotmail.it" style="color: #ffffff; text-decoration: underline;">giuliadesogus2000@hotmail.it</a>.</p>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">2. Tipologia di Dati Raccolti e Finalità</h3>
+                    <p>Questo sito web raccoglie e tratta dati personali esclusivamente per due finalità:</p>
+                    <div class="cv-list" style="margin-top: 10px; margin-bottom: 20px;">
+                        <p><strong>Dati forniti volontariamente dall'utente:</strong> Nome, indirizzo e-mail e testo del messaggio inviati esplicitamente attraverso il modulo di contatto ("Contact"). Questi dati vengono utilizzati al solo fine di rispondere alle richieste di informazioni o a potenziali collaborazioni artistico-professionali.</p>
+                        <p><strong>Dati statistici e di navigazione (Google Analytics 4):</strong> Questo sito si avvale di <strong>Google Analytics 4 (GA4)</strong>, un servizio di analisi web fornito da Google Ireland Limited ("Google"). GA4 utilizza cookie e identificatori per raccogliere informazioni sulle abitudini di navigazione dell'utente (pagine visitate, durata della sessione, dati geografici macroscopici, tipologia di dispositivo utilizzato). Tali dati vengono raccolti in forma prevalentemente aggregata e pseudonimizzata al solo scopo di monitorare le prestazioni del sito e ottimizzarne l'usabilità.</p>
+                    </div>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">3. Base Giuridica del Trattamento</h3>
+                    <p>Il trattamento dei dati per il form di contatto e per il monitoraggio di terze parti (Google Analytics) si basa interamente sul **consenso libero ed esplicito** espresso dall'utente all'atto dell'invio dei dati o tramite l'accettazione e l'interazione con i sistemi di tracciamento del sito.</p>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">4. Condivisione e Trasferimento dei Dati</h3>
+                    <p>I dati personali generati dal modulo contatti rimangono riservati e non verranno in alcun modo ceduti a terze parti. Per quanto concerne Google Analytics, le informazioni generate dai cookie sull'utilizzo del sito potrebbero essere trasferite e archiviate presso i server di Google LLC situati negli Stati Uniti. Il trasferimento avviene sulla base del quadro di adeguatezza vigente (EU-US Data Privacy Framework) e in conformità con i termini contrattuali di protezione dati di Google.</p>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">5. Periodo di Conservazione</h3>
+                    <p>I dati trasmessi via e-mail o modulo contatti saranno conservati per il tempo strettamente necessario a evadere la richiesta ricevuta. I dati raccolti da Google Analytics vengono conservati secondo le impostazioni standard impostate dal servizio di tracciamento (generalmente dai 2 ai 14 mesi).</p>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">6. Diritti dell'Utente</h3>
+                    <p>Ai sensi del GDPR, in qualità di interessato, hai il diritto in qualunque momento di richiedere l'accesso ai tuoi dati, la rettifica, la cancellazione degli stessi ("diritto all'oblio"), la limitazione del trattamento o di opporti al loro utilizzo. Puoi revocare il consenso in qualsiasi momento scrivendo a: <a href="mailto:giuliadesogus2000@hotmail.it" style="color: #ffffff; text-decoration: underline;">giuliadesogus2000@hotmail.it</a>.</p>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">7. Come Disattivare il Monitoraggio</h3>
+                    <p>Oltre alle preferenze che imposterai sul sito, puoi impedire a monte che Google Analytics utilizzi i tuoi dati di navigazione su qualsiasi sito web scaricando e installando il componente aggiuntivo ufficiale rilasciato da Google per il tuo browser al seguente indirizzo: <a href="https://tools.google.com/dlpage/gaoptout?hl=it" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: underline;">Estensione di disattivazione di Google Analytics</a>.</p>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid #2a2a2a; margin: 40px 0;">
+
+                <div class="lang-section text-en">
+                    <h2>Privacy and Cookie Policy</h2>
+                    <p>This Privacy Policy outlines how your personal data is collected and processed in accordance with Art. 13 of the EU General Data Protection Regulation (GDPR).</p>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">1. Data Controller</h3>
+                    <p>The Data Controller is <strong>Giulia Desogus</strong>. For any questions, updates, or erasure requests, you may contact the Controller directly via email at: <a href="mailto:giuliadesogus2000@hotmail.it" style="color: #ffffff; text-decoration: underline;">giuliadesogus2000@hotmail.it</a>.</p>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">2. Types of Data Collected and Purpose</h3>
+                    <p>This website processes personal data for two specific purposes:</p>
+                    <div class="cv-list" style="margin-top: 10px; margin-bottom: 20px;">
+                        <p><strong>Data provided voluntarily by the user:</strong> Your name, e-mail address, and message submitted through the "Contact" form. This data is processed purely to follow up on your informational inquiries or professional/artistic collaboration requests.</p>
+                        <p><strong>Browsing and statistical data (Google Analytics 4):</strong> This site plans to employ <strong>Google Analytics 4 (GA4)</strong>, a web analysis tool provided by Google Ireland Limited ("Google"). GA4 uses cookies and tracking identifiers to evaluate website usage (e.g., pages viewed, time spent, generalized geographic location, browser type). This data is treated in an aggregate and pseudonymous manner solely to assess site performance and improve user experience.</p>
+                    </div>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">3. Legal Basis for Processing</h3>
+                    <p>Data processing via the contact form and the deployment of third-party analytical trackers (Google Analytics) relies entirely on the user's **free and explicit consent**, granted when submitting the form or accepting the site’s tracking preferences.</p>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">4. Data Sharing and Transfer</h3>
+                    <p>Personal data gathered via the contact form remains fully confidential and will never be shared with third parties. Data logged by Google Analytics cookies may be transmitted to and stored by Google LLC on servers located in the United States. Such transfers are safeguarded by current adequacy instruments (EU-US Data Privacy Framework) and Google’s rigorous data protection terms.</p>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">5. Retention Period</h3>
+                    <p>Contact information is kept strictly for the duration needed to resolve the user's request. Data processed by Google Analytics is stored according to standard criteria dictated by the analytics platform (typically between 2 and 14 months).</p>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">6. User Rights</h3>
+                    <p>Under the GDPR framework, you have the right to access, rectify, or demand the deletion of your personal data ("right to be forgotten"), limit or object to its processing, and withdraw your consent at any absolute time. To exercise these privileges, write to: <a href="mailto:giuliadesogus2000@hotmail.it" style="color: #ffffff; text-decoration: underline;">giuliadesogus2000@hotmail.it</a>.</p>
+                    
+                    <h3 class="cv-title" style="margin: 25px 0 10px 0;">7. How to Opt-Out of Tracking</h3>
+                    <p>In addition to blocking cookies directly on this site, you can permanently prevent your navigation activity from being processed by Google Analytics across the web by installing Google's official browser extension at: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: underline;">Google Analytics Opt-out Browser Add-on</a>.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" aria-hidden="true" onclick="closeLightbox()">
+        <button type="button" class="close-btn" onclick="closeLightbox()" aria-label="Chiudi finestra">&times;</button>
+
+        <button type="button" id="lightbox-prev" class="lightbox-nav lightbox-prev" onclick="changeGlobalWork(-1, event)" aria-label="Opera precedente">&#10094;</button>
+        <button type="button" id="lightbox-next" class="lightbox-nav lightbox-next" onclick="changeGlobalWork(1, event)" aria-label="Opera successiva">&#10095;</button>
+
+        <div class="lightbox-content-wrapper" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="" onclick="handleImageClick(event)">
+        </div>
+
+        <div id="lightbox-dots" class="lightbox-dots" role="tablist" aria-label="Immagini dell'opera" onclick="event.stopPropagation()"></div>
+
+        <div class="lightbox-caption" onclick="event.stopPropagation()">
+            <h3 id="lightbox-title" class="lightbox-title"></h3>
+            <p id="lightbox-details" class="lightbox-details"></p>
+            <p id="lightbox-desc-it" class="lightbox-desc-it"></p>
+            <p id="lightbox-desc-en" class="lightbox-desc-en"></p>
+        </div>
+    </div>
+
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Informativa sui cookie">
+        <div class="cookie-text">
+            Questo sito utilizza cookie statistici anonimi di terze parti per migliorare l'esperienza di navigazione. Puoi scegliere di accettarli o continuare la navigazione rifiutandoli. Per saperne di più, consulta la nostra <a href="#page-privacy" data-page="privacy" onclick="closeCookieBanner()">Privacy Policy</a>.<br>
+            <span style="color: #888888; font-size: 0.75rem;">This site uses third-party anonymous statistical cookies. You can accept them or refuse and continue browsing. Read our <a href="#page-privacy" data-page="privacy" onclick="closeCookieBanner()">Privacy Policy</a>.</span>
+        </div>
+        <div class="cookie-buttons">
+            <button class="cookie-btn" onclick="handleCookieChoice('rejected')">Rifiuta / Refuse</button>
+            <button class="cookie-btn accept" onclick="handleCookieChoice('accepted')">Accetta / Accept</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            Giulia Desogus 2026© Copyright. All Rights Reserved.
+            <span style="color: #333333; margin: 0 8px;">|</span>
+            <a href="#page-privacy" data-page="privacy" style="color: #444444; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#444444'">Privacy Policy</a>
+            <span style="color: #333333; margin: 0 8px;">|</span>
+            <a href="javascript:void(0)" onclick="showCookieBanner()" style="color: #444444; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#444444'">Gestisci Consenso / Manage Consent</a>
+        </p>
+    </footer>
+
+    <script>
+        let pageTransitionInProgress = false;
+        const PAGE_TRANSITION_MS = 450; 
+
+        function setMainHeightTo(pageEl) {
+            const main = document.querySelector("main");
+            if (!main || !pageEl) return;
+            const h = pageEl.scrollHeight;
+            main.style.minHeight = h + "px";
+        }
+
+        function switchPage(pageName) {
+            const next = document.getElementById("page-" + pageName);
+            if (!next) return;
+
+            const current = document.querySelector(".page.active");
+            if (current === next || pageTransitionInProgress) return;
+
+            document.querySelectorAll("nav a").forEach(link => {
+                link.classList.remove("active");
+                link.removeAttribute("aria-current");
+            });
+            const nextBtn = document.getElementById("btn-" + pageName);
+            if (nextBtn) {
+                nextBtn.classList.add("active");
+                nextBtn.setAttribute("aria-current", "page");
+            }
+
+            if (!current) {
+                next.classList.add("active");
+                requestAnimationFrame(() => setMainHeightTo(next));
+                return;
+            }
+
+            pageTransitionInProgress = true;
+
+            const main = document.querySelector("main");
+            if (main) {
+                main.style.minHeight = current.scrollHeight + "px";
+            }
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+
+            requestAnimationFrame(() => {
+                current.classList.remove("active");
+                next.classList.add("active");
+                requestAnimationFrame(() => setMainHeightTo(next));
+
+                if (pageName === "works") {
+                    requestAnimationFrame(() => {
+                        const activeFilterBtn = document.querySelector(".filter-btn.active");
+                        if (activeFilterBtn) moveFilterDot(activeFilterBtn, true);
+                    });
+                }
+            });
+
+            setTimeout(() => {
+                pageTransitionInProgress = false;
+                if (next) setMainHeightTo(next);
+            }, PAGE_TRANSITION_MS);
+        }
+
+        window.addEventListener("load", () => {
+            const active = document.querySelector(".page.active");
+            if (active) setMainHeightTo(active);
+            initCookieConsent(); 
+        });
+
+        window.addEventListener("resize", () => {
+            if (pageTransitionInProgress) return;
+            const active = document.querySelector(".page.active");
+            if (active) setMainHeightTo(active);
+        });
+
+        function goHome() {
+            switchPage('home');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('a[data-page]').forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    switchPage(link.getAttribute('data-page'));
+                });
+            });
+
+            document.querySelectorAll('.gallery-item').forEach(function (item) {
+                item.setAttribute('role', 'listitem');
+                var btnWrapper = item;
+                btnWrapper.setAttribute('tabindex', '0');
+                var title = item.querySelector('.title');
+                var details = item.querySelector('.details');
+                var label = (title ? title.innerText : 'Opera') +
+                            (details ? ' – ' + details.innerText : '') +
+                            '. Premi Invio per ingrandire.';
+                btnWrapper.setAttribute('aria-label', label);
+                btnWrapper.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openLightbox(item);
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', function (e) {
+                var lb = document.getElementById('lightbox');
+                if (!lb.classList.contains('active')) return;
+                if (e.key === 'Escape') { closeLightbox(); }
+                else if (e.key === 'ArrowRight') { changeGlobalWork(1); }
+                else if (e.key === 'ArrowLeft') { changeGlobalWork(-1); }
+            });
+        });
+
+        let lastFocusedBeforeLightbox = null;
+
+        function moveFilterDot(buttonElement, instant) {
+            var dot = document.getElementById('filterDot');
+            var menu = document.getElementById('filterMenu');
+            if (!dot || !menu) return;
+
+            var menuRect = menu.getBoundingClientRect();
+            var btnRect = buttonElement.getBoundingClientRect();
+
+            // Su telefono il menù è impilato in colonna: il pallino scorre in verticale (top).
+            // Su desktop/tablet resta in riga: il pallino scorre in orizzontale (left), come sempre.
+            var isVertical = getComputedStyle(menu).flexDirection === 'column';
+
+            if (instant) {
+                dot.style.transition = 'none';
+            }
+
+            if (isVertical) {
+                dot.style.left = '5px';
+                dot.style.top = (btnRect.top - menuRect.top + btnRect.height / 2) + 'px';
+            } else {
+                dot.style.top = '50%';
+                dot.style.left = (btnRect.left - menuRect.left + 4) + 'px';
+            }
+            dot.classList.add('visible');
+
+            if (instant) {
+                // Sostituito l'hack sincrono void dot.offsetWidth con rAF per evitare Forced Reflow
+                requestAnimationFrame(function() {
+                    dot.style.transition = '';
+                });
+            }
+        }
+
+        function filterSelection(category, buttonElement) {
+            var buttons = document.getElementsByClassName("filter-btn");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+            buttonElement.classList.add("active");
+
+            moveFilterDot(buttonElement);
+
+            var items = document.getElementsByClassName("gallery-item");
+            for (var j = 0; j < items.length; j++) {
+                var itemCategory = items[j].getAttribute("data-category");
+
+                if (category === "all" || itemCategory === category) {
+                    items[j].classList.remove("hidden");
+                } else {
+                    items[j].classList.add("hidden");
+                }
+            }
+
+            const worksPage = document.getElementById('page-works');
+            if (worksPage) setMainHeightTo(worksPage);
+        }
+
+        window.addEventListener('resize', function () {
+            var worksPage = document.getElementById('page-works');
+            if (worksPage && worksPage.classList.contains('active')) {
+                var activeFilterBtn = document.querySelector('.filter-btn.active');
+                if (activeFilterBtn) moveFilterDot(activeFilterBtn, true);
+            }
+        });
+
+        let currentImageIndex = 0;
+        let currentImageArray = [];
+        let globalVisibleItems = [];
+        let currentGlobalItemIndex = 0;
+        let lightboxRect = null; // Cache geometrica per l'immagine nel lightbox
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function setupLightboxContent(element) {
+            let imagesAttr = element.getAttribute('data-images');
+            if (imagesAttr) {
+                currentImageArray = imagesAttr.split(',').map(img => img.trim());
+            } else {
+                currentImageArray = [element.querySelector('img').getAttribute('src')];
+            }
+            
+            currentImageIndex = 0;
+
+            var title = element.querySelector('.title').innerText;
+            var details = element.querySelector('.details').innerText;
+            var descIt = element.querySelector('.desc-it').innerText;
+            var descEn = element.querySelector('.desc-en').innerText;
+
+            document.getElementById('lightbox-title').innerText = title;
+            document.getElementById('lightbox-details').innerText = details;
+            document.getElementById('lightbox-desc-it').innerText = descIt;
+            document.getElementById('lightbox-desc-en').innerText = descEn;
+
+            updateLightboxImage(); 
+            renderDots();          
+        }
+
+        function openLightbox(element) {
+            globalVisibleItems = Array.from(document.querySelectorAll('.gallery-item:not(.hidden)'));
+            currentGlobalItemIndex = globalVisibleItems.indexOf(element);
+
+            setupLightboxContent(element);
+            const lb = document.getElementById('lightbox');
+            lastFocusedBeforeLightbox = document.activeElement;
+            lb.classList.add('active');
+            lb.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            const closeBtn = lb.querySelector('.close-btn');
+            if (closeBtn) closeBtn.focus();
+        }
+
+        // Ottimizzazione zoom: calcola i dati geometrici solo quando il cursore entra nell'immagine
+        lightboxImg.addEventListener('mouseenter', function(e) {
+            lightboxRect = e.target.getBoundingClientRect();
+        });
+
+        lightboxImg.addEventListener('mousemove', function(e) {
+            if (!lightboxRect) {
+                lightboxRect = e.target.getBoundingClientRect();
+            }
+            const x = ((e.clientX - lightboxRect.left) / lightboxRect.width) * 100;
+            const y = ((e.clientY - lightboxRect.top) / lightboxRect.height) * 100;
+            
+            lightboxImg.style.transformOrigin = `${x}% ${y}%`;
+            lightboxImg.style.transform = 'scale(1.6)';
+            lightboxImg.style.cursor = 'zoom-out';
+        });
+
+        lightboxImg.addEventListener('mouseleave', function() {
+            resetZoom();
+            lightboxRect = null; // Svuota la cache geometrica
+        });
+
+        function resetZoom() {
+            lightboxImg.style.transformOrigin = 'center center';
+            lightboxImg.style.transform = 'scale(1)';
+            lightboxImg.style.cursor = 'zoom-in';
+        }
+
+        function updateLightboxImage() {
+            lightboxImg.src = currentImageArray[currentImageIndex];
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentImageIndex);
+            });
+        }
+
+        function renderDots() {
+            const dotsContainer = document.getElementById('lightbox-dots');
+            dotsContainer.innerHTML = ''; 
+            
+            if (currentImageArray.length > 1) {
+                currentImageArray.forEach((_, index) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'dot' + (index === currentImageIndex ? ' active' : '');
+                    dot.onclick = (e) => {
+                        e.stopPropagation();
+                        currentImageIndex = index;
+                        updateLightboxImage();
+                    };
+                    dotsContainer.appendChild(dot);
+                });
+            }
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex >= currentImageArray.length) currentImageIndex = 0;
+            if (currentImageIndex < 0) currentImageIndex = currentImageArray.length - 1;
+            updateLightboxImage();
+        }
+
+        function handleImageClick(event) {
+            if (currentImageArray.length <= 1) return;
+
+            // Rigenera al volo il rect per i clic diretti
+            const rect = event.target.getBoundingClientRect();
+            const clickX = event.clientX - rect.left; 
+            
+            if (clickX > rect.width / 2) {
+                changeImage(1);
+            } else {
+                changeImage(-1);
+            }
+        }        
+
+        function changeGlobalWork(direction, event) {
+            if (event) event.stopPropagation(); 
+            resetZoom(); 
+            lightboxRect = null; // Forza il ricalcolo per il nuovo elemento caricato
+
+            currentGlobalItemIndex += direction;
+            
+            if (currentGlobalItemIndex >= globalVisibleItems.length) currentGlobalItemIndex = 0;
+            if (currentGlobalItemIndex < 0) currentGlobalItemIndex = globalVisibleItems.length - 1;
+            
+            let nextWorkElement = globalVisibleItems[currentGlobalItemIndex];
+            setupLightboxContent(nextWorkElement);
+        }
+
+        // --- SWIPE TOUCH: naviga tra le opere trascinando col dito (essenziale su mobile) ---
+        (function enableLightboxSwipe() {
+            const wrapper = document.querySelector('.lightbox-content-wrapper');
+            if (!wrapper) return;
+
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let isSwiping = false;
+            const SWIPE_THRESHOLD = 50; // px minimi orizzontali per considerarlo uno swipe
+            const SWIPE_RESTRAINT = 75; // px massimi verticali tollerati
+
+            wrapper.addEventListener('touchstart', function (e) {
+                if (currentImageArray.length <= 1 && globalVisibleItems.length <= 1) return;
+                const t = e.changedTouches[0];
+                touchStartX = t.clientX;
+                touchStartY = t.clientY;
+                isSwiping = false;
+            }, { passive: true });
+
+            wrapper.addEventListener('touchmove', function (e) {
+                const t = e.changedTouches[0];
+                if (Math.abs(t.clientX - touchStartX) > 10) isSwiping = true;
+            }, { passive: true });
+
+            wrapper.addEventListener('touchend', function (e) {
+                const t = e.changedTouches[0];
+                const deltaX = t.clientX - touchStartX;
+                const deltaY = t.clientY - touchStartY;
+
+                if (isSwiping && Math.abs(deltaX) >= SWIPE_THRESHOLD && Math.abs(deltaY) <= SWIPE_RESTRAINT) {
+                    // Uno swipe deciso passa all'opera successiva/precedente,
+                    // evitando che scatti anche il tap di navigazione tra le immagini interne
+                    e.preventDefault();
+                    changeGlobalWork(deltaX < 0 ? 1 : -1);
+                }
+                isSwiping = false;
+            });
+        })();
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('active');
+            lb.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            resetZoom();
+            lightboxRect = null;
+            if (lastFocusedBeforeLightbox && typeof lastFocusedBeforeLightbox.focus === 'function') {
+                lastFocusedBeforeLightbox.focus();
+            }
+        }
+
+        const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; 
+
+        function initCookieConsent() {
+            const consentRaw = localStorage.getItem('cookie-consent');
+            
+            if (!consentRaw) {
+                showCookieBanner();
+                return;
+            }
+
+            try {
+                const consentData = JSON.parse(consentRaw);
+                const now = new Date().getTime();
+                const sixMonthsInMs = 6 * 30 * 24 * 60 * 60 * 1000; 
+
+                if (now - consentData.timestamp > sixMonthsInMs) {
+                    localStorage.removeItem('cookie-consent');
+                    showCookieBanner();
+                } else if (consentData.choice === 'accepted') {
+                    loadGoogleAnalytics();
+                }
+            } catch (e) {
+                showCookieBanner();
+            }
+        }
+
+        function showCookieBanner() {
+            const banner = document.getElementById('cookie-banner');
+            if (banner) banner.classList.add('visible');
+        }
+
+        function closeCookieBanner() {
+            const banner = document.getElementById('cookie-banner');
+            if (banner) banner.classList.remove('visible');
+        }
+
+        function handleCookieChoice(choice) {
+            const now = new Date().getTime();
+            const consentData = {
+                choice: choice,
+                timestamp: now,
+                banner_shown: true
+            };
+            
+            localStorage.setItem('cookie-consent', JSON.stringify(consentData));
+            closeCookieBanner();
+            
+            if (choice === 'accepted') {
+                loadGoogleAnalytics();
+            } else if (choice === 'rejected') {
+                if (window.gtag) {
+                    window.location.reload();
+                }
+            }
+        }
+
+        function loadGoogleAnalytics() {
+            if (document.getElementById('ga-script-base')) return;
+
+            const script = document.createElement('script');
+            script.id = 'ga-script-base';
+            script.async = true;
+            script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+            document.head.appendChild(script);
+
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function() { dataLayer.push(arguments); };
+            
+            gtag('js', new Date());
+            gtag('config', GA_MEASUREMENT_ID, {
+                'anonymize_ip': true,
+                'cookie_flags': 'SameSite=None;Secure'
+            });
+        }
+
+        // Avvia il banner cookie al caricamento della pagina
+        // Se l'utente aveva già risposto in sessioni precedenti ma il banner
+        // non appariva mai (bug), resettiamo e mostriamo di nuovo una volta sola.
+        (function () {
+            var raw = localStorage.getItem('cookie-consent');
+            var needsReset = false;
+            if (raw) {
+                try {
+                    var data = JSON.parse(raw);
+                    // Se il consenso è stato salvato prima che il banner funzionasse
+                    // (flag 'banner_shown' assente), mostriamo di nuovo per sicurezza
+                    if (!data.banner_shown) needsReset = true;
+                } catch (e) { needsReset = true; }
+            }
+            if (needsReset) localStorage.removeItem('cookie-consent');
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initCookieConsent);
+            } else {
+                initCookieConsent();
+            }
+        })();
+    </script>
+</body>
+</html>
